@@ -35,6 +35,9 @@ class Login : AppCompatActivity() {
         val signIn = findViewById<Button>(R.id.signInButton)
 
         signIn.setOnClickListener {
+            /* Jacques
+            Read firebase to check if user has registered account
+             */
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
         }

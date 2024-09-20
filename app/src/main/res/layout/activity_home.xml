@@ -39,8 +39,10 @@
 
                 <!-- Fishing Journal Icon -->
                 <ImageView
+                    android:id="@+id/fishingJournal"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:clickable="true"
                     android:src="@drawable/ic_fishing_journal_icon" />
 
                 <!-- Fishing Journal Text -->
@@ -61,8 +63,10 @@
 
                 <!-- Log a Fish Icon -->
                 <ImageView
+                    android:id="@+id/logAFish"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:clickable="true"
                     android:src="@drawable/ic_log_a_fish_icon" />
 
                 <!-- Log a Fish Text -->
@@ -92,8 +96,10 @@
 
                 <!-- Location Weather Icon -->
                 <ImageView
+                    android:id="@+id/locationWeather"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:clickable="true"
                     android:src="@drawable/ic_location_weather_icon" />
 
                 <!-- Location Weather Text -->
@@ -114,8 +120,10 @@
 
                 <!-- Community News Feed Icon -->
                 <ImageView
+                    android:id="@+id/communityNewsFeed"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:clickable="true"
                     android:src="@drawable/ic_community_news_feed_icon" />
 
                 <!-- Community News Feed Text -->
@@ -145,8 +153,10 @@
 
                 <!-- Profile Icon -->
                 <ImageView
+                    android:id="@+id/profile"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:clickable="true"
                     android:src="@drawable/ic_profile_icon" />
 
                 <!-- Profile Text -->
@@ -167,8 +177,10 @@
 
                 <!-- Settings Icon -->
                 <ImageView
+                    android:id="@+id/settings"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:clickable="true"
                     android:src="@drawable/ic_settings_icon" />
 
                 <!-- Settings Text -->

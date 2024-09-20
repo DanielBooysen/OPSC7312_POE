@@ -2,6 +2,7 @@ package com.example.opsc7312_poe
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,16 @@ class Register : AppCompatActivity() {
         signUpLink.setOnClickListener {
             // Start RegisterActivity
             val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+        }
+
+        val registerButton = findViewById<Button>(R.id.registerButton)
+
+        registerButton.setOnClickListener{
+            /*Jacques
+            Save user data to new account in database
+             */
+            val intent = Intent(this, Home::class.java)
             startActivity(intent)
         }
     }
