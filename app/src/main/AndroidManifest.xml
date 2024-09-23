@@ -21,6 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Register"/>
+        <activity android:name=".Home"/>
+        <activity android:name=".Profile"/>
+        <activity android:name=".Settings"/>
+        <activity android:name=".CommunityNewsFeed"/>
+        <activity android:name=".FishLogging"/>
+        <activity android:name=".Journal"/>
+        <activity android:name=".LocationWeather"/>
     </application>
-
 </manifest>
