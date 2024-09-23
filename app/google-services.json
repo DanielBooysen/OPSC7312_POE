@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "425901529747",
+    "project_id": "fishaholic-za",
+    "storage_bucket": "fishaholic-za.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425901529747:android:85b5e0a79f35ffdef48b66",
+        "android_client_info": {
+          "package_name": "com.example.opsc7312_poe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsRmH34sne35tnyEs7-uOmZ7m4N3Qp3HI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

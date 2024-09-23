@@ -8,15 +8,25 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-//import com.google.firebase.auth.FirebaseAuth
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class Register : AppCompatActivity() {
-   // private lateinit var auth: FirebaseAuth
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestoreDatabase: FirestoreDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
-       //auth = FirebaseAuth.getInstance()
+
+        //Initialize Firebase authentication
+        auth = FirebaseAuth.getInstance()
+        // Initialize the FirestoreDatabase class
+        firestoreDatabase = FirestoreDatabase()
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.register)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -34,29 +44,58 @@ class Register : AppCompatActivity() {
 
         val registerButton = findViewById<Button>(R.id.registerButton)
 
-        registerButton.setOnClickListener{
-           //Save user data to new account in database
-            /*
- val email = findViewById<TextView>(R.id.emailEditText).text.toString()
+        registerButton.setOnClickListener {
+            //Save user data to new account in database
+            val email = findViewById<TextView>(R.id.emailEditText).text.toString()
             val password = findViewById<TextView>(R.id.passwordEditText).text.toString()
+            val name = findViewById<TextView>(R.id.nameEditText).text.toString()
+
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-             */
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
-            //finish()
-            /*
-            } else {
-                Toast.makeText(baseContext, "Registration failed.", Toast.LENGTH_SHORT).show()
+                            val userId = auth.currentUser?.uid
+
+                            // Prepare user data map
+                            val userData = hashMapOf(
+                                "name" to name,
+                                "email" to email
+                            )
+
+                            // Save user data to Firestore
+                            if (userId != null) {
+                                firestoreDatabase.addUser(userId, userData,
+                                    onSuccess = {
+                                        val intent = Intent(this, Home::class.java)
+                                        startActivity(intent)
+                                        finish()
+                                    },
+                                    onFailure = { exception ->
+                                        Toast.makeText(
+                                            this,
+                                            "Failed to save user data: ${exception.message}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                )
+                            }
+
+                        } else {
+                            Toast.makeText(
+                                baseContext,
+                                "Registration failed: ${task.exception?.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
             } else {
-                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Please enter email and password",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-             */
         }
     }
 }
