@@ -10,13 +10,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+//import com.google.firebase.auth.FirebaseAuth
 
 
 class Login : AppCompatActivity() {
+    //private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+       // auth = FirebaseAuth.getInstance()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.login)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -36,11 +39,29 @@ class Login : AppCompatActivity() {
         val signIn = findViewById<Button>(R.id.signInButton)
 
         signIn.setOnClickListener {
-            /* Jacques
-            Read firebase to check if user has registered account
+            // Read firebase to check if user has registered account
+            /*
+            val email = findViewById<TextView>(R.id.emailEditText).text.toString()
+            val password = findViewById<TextView>(R.id.passwordEditText).text.toString()
+
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
              */
             val intent = Intent(this, Home::class.java)
             startActivity(intent)
+            //finish()
+            /*
+             } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            } else {
+                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
+            }
+             */
         }
     }
 }
