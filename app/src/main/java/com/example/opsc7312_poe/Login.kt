@@ -22,6 +22,7 @@ class Login : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         // Get the reference to the TextView
         val signUpLink = findViewById<TextView>(R.id.signUpLink)
 
