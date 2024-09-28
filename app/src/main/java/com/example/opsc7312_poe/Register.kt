@@ -59,8 +59,9 @@ class Register : AppCompatActivity() {
 
                             // Prepare user data map
                             val userData = hashMapOf(
-                                "name" to name,
-                                "email" to email
+                                "email" to email,
+                                "password" to password,
+                                "name" to name
                             )
 
                             // Save user data to Firestore

@@ -61,11 +61,13 @@ class Login : AppCompatActivity() {
                             if (userId != null) {
                                 firestoreDatabase.getUser(userId,
                                     onSuccess = { document ->
-                                        // You can now use the user data
-                                        val userData = document.data
-                                        val intent = Intent(this, Home::class.java)
-                                        startActivity(intent)
-                                        finish()
+                                        if(document.exists()){
+                                            if(document["email"] == email && document["password"] == password){
+                                                val intent = Intent(this, Home::class.java)
+                                                startActivity(intent)
+                                                finish()
+                                            }
+                                        }
                                     },
                                     onFailure = { exception ->
                                         Toast.makeText(

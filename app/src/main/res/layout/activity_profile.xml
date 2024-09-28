@@ -4,6 +4,114 @@
     android:id="@+id/profileView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
+    <!-- App Logo at the top of the screen -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo" />
+
+    <!-- Name and Email -->
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/profile_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"/>
+
+    <!-- Linked Accounts Section -->
+    <TextView
+        android:id="@+id/linked_accounts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Linked accounts"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Social Media Icons -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp">
+
+        <ImageView
+            android:id="@+id/google_account"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_google_icon"
+        android:contentDescription="Google"/>
+
+        <ImageView
+            android:id="@+id/facebook_account"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_facebook_icon"
+        android:contentDescription="Facebook"
+        android:layout_marginLeft="16dp"/>
+
+        <ImageView
+            android:id="@+id/twitter_account"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_x_icon"
+        android:contentDescription="Twitter"
+        android:layout_marginLeft="16dp"/>
+    </LinearLayout>
+
+    <!-- Update Password Section -->
+    <EditText
+        android:id="@+id/update_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Update Password"
+        android:inputType="textPassword"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:backgroundTint="@android:color/holo_green_light"/>
+
+    <!-- Bottom Navigation Icons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="24dp">
+
+        <ImageView
+            android:id="@+id/home_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_home_icon"
+        android:contentDescription="Home"/>
+
+        <ImageView
+            android:id="@+id/settings_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_settings_icon"
+        android:contentDescription="Settings"
+        android:layout_marginLeft="24dp"/>
+    </LinearLayout>
 </LinearLayout>
