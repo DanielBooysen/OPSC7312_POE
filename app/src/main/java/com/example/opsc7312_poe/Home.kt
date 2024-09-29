@@ -1,15 +1,12 @@
 package com.example.opsc7312_poe
 
-import android.R.layout
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-//import com.google.firebase.auth.FirebaseAuth
 
 class Home : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,42 +21,42 @@ class Home : AppCompatActivity() {
 
         val fishingJournal = findViewById<ImageView>(R.id.fishingJournal)
 
-        fishingJournal.setOnClickListener{
-            val intent = Intent(this, Journal::class.java)
+        fishingJournal.setOnClickListener {
+            val intent = Intent(this, FishJournalActivity::class.java)
             startActivity(intent)
         }
 
         val logAFish = findViewById<ImageView>(R.id.logAFish)
 
-        logAFish.setOnClickListener{
+        logAFish.setOnClickListener {
             val intent = Intent(this, FishLogging::class.java)
             startActivity(intent)
         }
 
         val locationWeather = findViewById<ImageView>(R.id.locationWeather)
 
-        locationWeather.setOnClickListener{
+        locationWeather.setOnClickListener {
             val intent = Intent(this, LocationWeather::class.java)
             startActivity(intent)
         }
 
         val communityNewsFeed = findViewById<ImageView>(R.id.communityNewsFeed)
 
-        communityNewsFeed.setOnClickListener{
+        communityNewsFeed.setOnClickListener {
             val intent = Intent(this, CommunityNewsFeed::class.java)
             startActivity(intent)
         }
 
         val profile = findViewById<ImageView>(R.id.profile)
 
-        profile.setOnClickListener{
+        profile.setOnClickListener {
             val intent = Intent(this, Profile::class.java)
             startActivity(intent)
         }
 
         val settings = findViewById<ImageView>(R.id.settings)
 
-        settings.setOnClickListener{
+        settings.setOnClickListener {
             val intent = Intent(this, Settings::class.java)
             startActivity(intent)
         }
