@@ -105,6 +105,12 @@ fun EntryDetailScreen(entry: FishEntry, onBack: () -> Unit) {
                 Text("Time: ${entry.time}")
                 Text("Weather: ${entry.weather}")
                 Text("Location: ${entry.location}")
+
+                // Button to go back to the home page
+                Button(onClick = onBack) {
+                    Text("Back to Home")
+
+
             }
         }
     }
