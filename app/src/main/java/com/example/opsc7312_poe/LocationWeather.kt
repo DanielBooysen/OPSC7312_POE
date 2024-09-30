@@ -1,6 +1,8 @@
 package com.example.opsc7312_poe
 
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -15,7 +17,7 @@ import java.util.*
 class LocationWeather : AppCompatActivity() {
 
     // AccuWeather API key
-    private val apiKey = "DecQ2sow31nZ8mKEqzB2BBdiRqurR8Ip"
+    private val apiKey = "xzLgGLlJGYuYhFgLLa1HmvUIC2lyAM6G"
 
     // Location keys for the dams
     private val locationKeys = mapOf(
@@ -44,8 +46,11 @@ class LocationWeather : AppCompatActivity() {
 
         val weatherService = WeatherService.create()
 
-        // Fetch weather for all dams
-        locationKeys.forEach { (damName, locationKey) ->
+        // Sort the location keys alphabetically by dam names
+        val sortedLocationKeys = locationKeys.toSortedMap(String.CASE_INSENSITIVE_ORDER)
+
+        // Fetch weather for all dams in alphabetical order
+        sortedLocationKeys.forEach { (damName, locationKey) ->
             fetchWeather(weatherService, damName, locationKey)
         }
     }
@@ -88,26 +93,58 @@ class LocationWeather : AppCompatActivity() {
     }
 
     private fun displayWeather(damName: String, weather: HourlyForecastResponse?) {
-        val weatherTextView = findViewById<TextView>(R.id.weatherTextView)
+        val layout = findViewById<LinearLayout>(R.id.weatherLayout) // Get the root layout
+
+        // Create a new layout for each dam's weather information
+        val damLayout = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(16, 16, 16, 16)
+        }
+
         if (weather != null) {
             val temp = weather.Temperature.Value
             val tempUnit = weather.Temperature.Unit
             val condition = weather.IconPhrase
             val windSpeed = weather.Wind.Speed.Value
             val windUnit = weather.Wind.Speed.Unit
+            val iconNumber = weather.WeatherIcon
 
-            // Append the weather info for each dam to the TextView
+            // Create TextView for dam's weather info
             val weatherInfo = """
             $damName:
             Temperature: $temp$tempUnit
             Condition: $condition
             Wind: $windSpeed $windUnit
-            ----------------------
         """.trimIndent()
+            val weatherTextView = TextView(this).apply {
+                text = weatherInfo
+                textSize = 16f
+            }
 
-            weatherTextView.append("$weatherInfo\n")
+            // Create ImageView for weather icon
+            val weatherIconView = ImageView(this)
+            val iconResourceName = String.format(Locale.getDefault(), "aw%02d", iconNumber)
+            val resId = resources.getIdentifier(iconResourceName, "drawable", packageName)
+            if (resId != 0) {
+                weatherIconView.setImageResource(resId)
+            } else {
+                // Fallback to aw01.png if no valid icon is found
+                val defaultResId = resources.getIdentifier("aw01", "drawable", packageName)
+                weatherIconView.setImageResource(defaultResId)
+            }
+
+            // Add views to the dam layout
+            damLayout.addView(weatherIconView) // Add the icon
+            damLayout.addView(weatherTextView) // Add the weather info
         } else {
-            weatherTextView.append("$damName: No weather data available\n")
+            val weatherTextView = TextView(this).apply {
+                text = "$damName: No weather data available"
+                textSize = 16f
+            }
+            damLayout.addView(weatherTextView)
         }
+
+        // Add each dam layout to the main layout
+        layout.addView(damLayout)
     }
 }
