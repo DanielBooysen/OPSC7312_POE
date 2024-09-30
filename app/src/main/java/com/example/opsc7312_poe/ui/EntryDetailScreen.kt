@@ -111,6 +111,7 @@ fun EntryDetailScreen(entry: FishEntry, onBack: () -> Unit) {
                     Text("Back to Home")
 
 
+                }
             }
         }
     }
