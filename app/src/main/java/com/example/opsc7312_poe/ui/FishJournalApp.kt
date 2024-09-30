@@ -54,12 +54,11 @@ fun FishJournalApp() {
 
             if (showDialog) {
                 AddEntryDialog(
-                    onDismiss = { showDialog = false },
-                    onAddEntry = { newEntry ->
-                        entries = entries + newEntry
-                        showDialog = false
-                    }
-                )
+                    onDismiss = { showDialog = false }
+                ) { newEntry ->
+                    (entries + newEntry).also { entries = it as List<FishEntry> }
+                    showDialog = false
+                }
             }
         }
         composable("entry/{entryId}") { backStackEntry ->

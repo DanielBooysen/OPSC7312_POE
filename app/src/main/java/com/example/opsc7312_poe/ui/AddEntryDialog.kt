@@ -1,6 +1,7 @@
 package com.example.opsc7312_poe.ui
 
 import android.net.Uri
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
@@ -9,14 +10,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.opsc7312_poe.data.FishEntry
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.util.*
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExposedDropdownMenuDefaults
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddEntryDialog(onDismiss: () -> Unit, onAddEntry: (FishEntry) -> Unit) {
+fun AddEntryDialog(onDismiss: () -> Unit, onAddEntry: (Any?) -> Unit) {
     // State variables for entry fields
     var species by remember { mutableStateOf("") }
     var length by remember { mutableStateOf("") }
@@ -27,6 +31,10 @@ fun AddEntryDialog(onDismiss: () -> Unit, onAddEntry: (FishEntry) -> Unit) {
     var weather by remember { mutableStateOf("") }
     var location by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
+
+    // Firebase instances
+    val db = FirebaseFirestore.getInstance()  // Firestore instance
+    val storage = FirebaseStorage.getInstance().reference  // Firebase Storage reference
 
     // Expanded states for dropdowns
     var speciesExpanded by remember { mutableStateOf(false) }
@@ -45,6 +53,30 @@ fun AddEntryDialog(onDismiss: () -> Unit, onAddEntry: (FishEntry) -> Unit) {
         contract = ActivityResultContracts.GetContent()
     ) { uri ->
         imageUri = uri
+    }
+
+    // Function to upload image and return the download URL (run outside composable scope)
+    suspend fun uploadImage(uri: Uri): String? {
+        return try {
+            val ref = storage.child("images/${UUID.randomUUID()}.jpg")
+            ref.putFile(uri).await()  // Upload image to Firebase Storage
+            ref.downloadUrl.await().toString()  // Get the download URL
+        } catch (e: Exception) {
+            Log.e("Firebase", "Image upload failed: $e")
+            null
+        }
+    }
+
+    // Function to save the fish entry to Firestore (run outside composable scope)
+    fun saveFishEntry(fishEntry: FishEntry) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                db.collection("fishEntries").add(fishEntry).await()
+                Log.d("Firebase", "Fish entry added successfully")
+            } catch (e: Exception) {
+                Log.e("Firebase", "Error adding fish entry: $e")
+            }
+        }
     }
 
     // Dialog to add new fish entry
@@ -227,9 +259,10 @@ fun AddEntryDialog(onDismiss: () -> Unit, onAddEntry: (FishEntry) -> Unit) {
         },
         confirmButton = {
             Button(onClick = {
-                // Add entry when confirm button is pressed
-                onAddEntry(
-                    FishEntry(
+                // Coroutine to handle Firebase operations
+                CoroutineScope(Dispatchers.Main).launch {
+                    val imageUrl = imageUri?.let { uploadImage(it) }
+                    val fishEntry = FishEntry(
                         date = Date(),
                         species = species,
                         length = length.toFloatOrNull() ?: 0f,
@@ -239,10 +272,15 @@ fun AddEntryDialog(onDismiss: () -> Unit, onAddEntry: (FishEntry) -> Unit) {
                         time = time,
                         weather = weather,
                         location = location,
-                        imageUri = imageUri?.toString() // Store the image URI as string
+                        imageUri = imageUrl  // Store the image URL from Firebase Storage
                     )
-                )
-                onDismiss()
+
+                    // Save fish entry to Firestore
+                    saveFishEntry(fishEntry)
+
+                    onAddEntry()  // Callback after entry is added
+                    onDismiss()
+                }
             }) {
                 Text("Add")
             }
@@ -253,4 +291,8 @@ fun AddEntryDialog(onDismiss: () -> Unit, onAddEntry: (FishEntry) -> Unit) {
             }
         }
     )
+}
+
+fun onAddEntry() {
+    TODO("Not yet implemented")
 }
