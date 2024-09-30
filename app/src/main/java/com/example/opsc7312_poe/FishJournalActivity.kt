@@ -22,7 +22,7 @@ class  FishJournalApp : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_journal)
 
         // Initialize Firebase Authentication
         auth = FirebaseAuth.getInstance()

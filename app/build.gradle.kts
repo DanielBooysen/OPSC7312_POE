@@ -54,12 +54,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    implementation( "io.coil-kt:coil:2.2.2")
-    implementation( "io.coil-kt:coil-compose:2.2.2")
 
 
-// Add Coil for Jetpack Compose
-    implementation ("io.coil-kt:coil-compose:2.3.0")
 
 
     implementation("androidx.navigation:navigation-compose:2.5.3")
@@ -71,7 +67,6 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.firebase.storage.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

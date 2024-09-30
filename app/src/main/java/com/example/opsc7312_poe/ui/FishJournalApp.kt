@@ -66,6 +66,11 @@ fun FishJournalApp() {
             val entry = entries.find { it.id.toString() == entryId }
             if (entry != null) {
                 EntryDetailScreen(entry = entry, onBack = { navController.popBackStack() })
+
+
+
+
+
             }
         }
     }
