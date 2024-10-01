@@ -109,3 +109,7 @@ class FishLogging : AppCompatActivity() {
                 }
             }
 
+// This code contains a fish logging activity, which handlex user input, for fish logging entries saving to Firebase.
+// The following code was taken from Android
+// Author: Android
+// Link: https://developer.android.com/guide/components/activities/activity-lifecycle#:~:text=An%20Activity%20is%20an%20application%20component

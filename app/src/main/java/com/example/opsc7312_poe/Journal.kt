@@ -31,16 +31,22 @@ class Journal : AppCompatActivity() {
             insets
         }
 
-        // Initialize Firebase authentication and Firestore
-        auth = FirebaseAuth.getInstance()
-        firestore = FirebaseFirestore.getInstance()
+            // Initialize Firebase authentication and Firestore
+            auth = FirebaseAuth.getInstance()
+            firestore = FirebaseFirestore.getInstance()
         adapter = FishEntryAdapter(mutableListOf<FishEntry>())
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewFishEntries)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-        fetchFishEntries()
-    }
+
+        val firestoreDatabase = FirebaseFirestore.getInstance()
+        val auth = FirebaseAuth.getInstance()
+
+
+fetchFishEntries()
+
+        }
 
     private fun fetchFishEntries() {
         // Get the current user's ID
@@ -89,4 +95,12 @@ class Journal : AppCompatActivity() {
             Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+
+
 }
+// This code has a On create which initializes Firebase, which at the end fetches the users logged data from Firestore
+// The following code was taken from Stack Overflow
+// Author: Stack Overflow
+// Link:https://stackoverflow.com/questions/28929637/difference-and-uses-of-oncreate-oncreateview-and-onactivitycreated-in-fra#:~:text=The%20onCreate()%20method%20in%20a%20Fragment

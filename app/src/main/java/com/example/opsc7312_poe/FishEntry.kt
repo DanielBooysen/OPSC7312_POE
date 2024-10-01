@@ -14,3 +14,7 @@ data class FishEntry(
     var userEmail: String = ""
 )
 
+// This code is a data class for Fish Entry, for each specific, field above.
+// The following code was taken from Jetbrains Kotlin
+// Author: Jetbrains
+// Link: https://kotlinlang.org/docs/data-classes.html#standard-data-classes

@@ -6,8 +6,11 @@
     <!-- Permissions needed for internet access -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+
+
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -38,6 +41,13 @@
         <activity android:name=".Journal" />
         <activity android:name=".LocationWeather" />
 
+        <!-- Metadata for Google Sign-In -->
+        <meta-data
+            android:name="com.google.android.gms.auth.api.signin.API_KEY"
+            android:value="@string/default_web_client_id" />
+
     </application>
+
+
 
 </manifest>

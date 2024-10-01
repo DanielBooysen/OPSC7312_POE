@@ -55,3 +55,8 @@ class FishEntryAdapter(
         notifyDataSetChanged()
     }
 }
+
+// This code is a kotlin for a Recycler View, that displays a list of Fish Entries.
+// The following code was taken from Geeks for Geeks
+// Author: Geeks for Geeks
+// Link: https://www.geeksforgeeks.org/android-recyclerview/
