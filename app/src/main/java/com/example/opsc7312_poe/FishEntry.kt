@@ -9,6 +9,8 @@ data class FishEntry(
     val time: String = "",
     val weather: String = "",
     val location: String = "",
-    val userId: String = ""
+    val userId: String = "",
+    var userName: String = "",
+    var userEmail: String = ""
 )
 
