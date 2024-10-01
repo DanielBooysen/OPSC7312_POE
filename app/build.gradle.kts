@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    //alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services") // Google Services plugin for Firebase
 }
 
@@ -32,9 +32,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+    //kotlinOptions {
+    //    jvmTarget = "1.8"
+    //}
 }
 
 // Declare explicit task dependencies to ensure correct order
@@ -60,7 +60,7 @@ dependencies {
     // Firebase Libraries
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
-    implementation(libs.androidx.foundation.layout.android)
+    //implementation(libs.androidx.foundation.layout.android)
 
     // Testing Libraries
     testImplementation(libs.junit)
