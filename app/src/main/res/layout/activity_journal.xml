@@ -48,6 +48,12 @@
         android:clipToPadding="false"
         android:layout_marginBottom="16dp" />
 
-
-
 </LinearLayout>
+
+    <!-- This XML layout is for the Journal Activity
+    // The following code was referenced from Android's UI Patterns
+    // Author: Android Developers
+    // Link: https://developer.android.com/guide/topics/ui/controls/text-view
+    -->
+
+

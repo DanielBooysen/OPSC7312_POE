@@ -41,3 +41,9 @@
         android:layout_marginBottom="16dp" />
 
 </LinearLayout>
+
+    <!-- This XML layout defines the structure for the News Feed activity
+    // The following code is inspired by Firebase's Realtime Database documentation
+    // Author: Firebase Team
+    // Link: https://firebase.google.com/docs/database/android/start
+    -->

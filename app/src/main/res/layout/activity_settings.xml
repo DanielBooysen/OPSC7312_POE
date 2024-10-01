@@ -141,3 +141,9 @@
         android:contentDescription="Home"/>
     </LinearLayout>
 </LinearLayout>
+
+    <!-- This XML code outlines the layout for Settings Activity
+    // The following code is inspired by Android Settings UI guidelines
+    // Author: Android Developers
+    // Link: https://developer.android.com/guide/topics/ui/settings
+    -->
