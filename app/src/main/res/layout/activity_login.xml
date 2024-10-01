@@ -71,3 +71,9 @@
         android:clickable="true"
         android:focusable="true" />
 </LinearLayout>
+
+    <!-- This XML code is for the Login Activity layout
+    // The following code is sourced from Android Authentication Documentation
+    // Author: Google Developers
+    // Link: https://developer.android.com/training/id-auth/log-in
+    -->

@@ -80,3 +80,9 @@
         android:paddingTop="16dp" />
 
 </LinearLayout>
+
+    <!-- This XML layout is for the Registration Activity
+    // The following code is adapted from Android's user registration practices
+    // Author: Android Developers
+    // Link: https://developer.android.com/training/secure-android
+    -->

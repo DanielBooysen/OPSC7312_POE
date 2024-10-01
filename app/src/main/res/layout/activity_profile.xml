@@ -115,3 +115,9 @@
         android:layout_marginLeft="24dp"/>
     </LinearLayout>
 </LinearLayout>
+
+    <!-- This XML code structures the Profile Activity layout
+    // The following code was taken from Android's user profile design resources
+    // Author: Android Developers
+    // Link: https://developer.android.com/guide/topics/ui/layout/recyclerview
+    -->

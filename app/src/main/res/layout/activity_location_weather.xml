@@ -30,3 +30,9 @@
         android:orientation="vertical"/>
     </LinearLayout>
 </ScrollView>
+
+    <!-- This XML layout is used for the Location Weather feature
+    // The following code was taken from Android Developer's Guide to Weather Apps
+    // Author: Android Developers
+    // Link: https://developer.android.com/guide/topics/ui/controls/checkbox
+    -->

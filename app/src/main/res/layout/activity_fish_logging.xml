@@ -194,3 +194,11 @@
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
+
+    <!-- This XML code defines the layout for Fish Logging activity
+    // The following code was inspired by Android Developer Documentation
+    // Author: Google Developers
+    // Link: https://developer.android.com/guide/topics/ui/declaring-layout
+    -->
+
+
