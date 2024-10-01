@@ -1,3 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">OPSC7312_POE</string>
+    <!-- Application name -->
+    <string name="app_name">Fishaholic</string>
+
+    <!-- Fish species options -->
+    <string-array name="fish_species">
+        <item>Common Carp</item>
+        <item>Grass Carp</item>
+        <item>Blue Kurper</item>
+        <item>Redbreast Kurper</item>
+        <item>Canary Kurper</item>
+        <item>Largemouth Bass</item>
+        <item>Smallmouth Bass</item>
+        <item>African Sharptooth Catfish</item>
+        <item>Largemouth Yellowfish</item>
+        <item>Smallmouth Yellowfish</item>
+        <item>Mudfish</item>
+        <item>Rainbow Trout</item>
+        <item>Brown Trout</item>
+    </string-array>
+
+    <!-- Time of day options -->
+    <string-array name="time_of_day">
+        <item>Early Morning</item>
+        <item>Late Morning</item>
+        <item>Early Afternoon</item>
+        <item>Late Afternoon</item>
+        <item>Early Evening</item>
+        <item>Late Evening</item>
+    </string-array>
+
+    <!-- Weather conditions options -->
+    <string-array name="weather_conditions">
+        <item>Sunny</item>
+        <item>Rainy</item>
+        <item>Windy</item>
+        <item>Stormy</item>
+        <item>Snowy</item>
+        <item>Cloudy</item>
+    </string-array>
+
+    <!-- Dam location options -->
+    <string-array name="dam_locations">
+        <item>Roodeplaat Dam</item>
+        <item>Rietvlei Dam</item>
+        <item>Hartebeespoort Dam</item>
+        <item>Bronkhorstspruit Dam</item>
+        <item>Vaal Dam</item>
+    </string-array>
 </resources>

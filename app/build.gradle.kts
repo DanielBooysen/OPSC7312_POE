@@ -60,6 +60,7 @@ dependencies {
     // Firebase Libraries
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
+    implementation(libs.androidx.foundation.layout.android)
 
     // Testing Libraries
     testImplementation(libs.junit)

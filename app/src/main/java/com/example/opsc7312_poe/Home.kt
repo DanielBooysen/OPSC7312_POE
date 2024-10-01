@@ -1,5 +1,6 @@
 package com.example.opsc7312_poe
 
+
 import android.R.layout
 import android.content.Intent
 import android.media.Image
@@ -22,7 +23,7 @@ class Home : AppCompatActivity() {
             insets
         }
 
-        val fishingJournal = findViewById<ImageView>(R.id.fishingJournal)
+        val fishingJournal = findViewById<ImageView>(R.id.fishing_Journal)
 
         fishingJournal.setOnClickListener{
             val intent = Intent(this, Journal::class.java)

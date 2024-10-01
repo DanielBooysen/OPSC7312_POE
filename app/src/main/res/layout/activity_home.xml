@@ -39,7 +39,7 @@
 
                 <!-- Fishing Journal Icon -->
                 <ImageView
-                    android:id="@+id/fishingJournal"
+                    android:id="@+id/fishing_Journal"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:clickable="true"

@@ -1,9 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/journal"
+    android:id="@+id/fishingJournal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Orange Heading Block -->
+    <TextView
+        android:id="@+id/fishJournalHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Fish Journal"
+        android:textColor="@android:color/white"
+        android:background="#FFA500"
+        android:textSize="24sp"
+        android:padding="16dp"
+        android:textStyle="bold" />
+
+    <!-- Fish Drawable Below the Heading -->
+    <ImageView
+        android:id="@+id/logAFish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_log_a_fish_icon"
+        android:layout_gravity="center"
+        android:paddingTop="16dp" />
+
+    <!-- RecyclerView to Display Fish Entries -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewFishEntries"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+    android:paddingTop="16dp"
+    android:clipToPadding="false" />
 
 </LinearLayout>
