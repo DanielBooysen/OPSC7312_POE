@@ -97,8 +97,8 @@ fetchFishEntries()
     }
 
 
-
-
 }
-
-
+// This code has a On create which initializes Firebase, which at the end fetches the users logged data from Firestore
+// The following code was taken from Stack Overflow
+// Author: Stack Overflow
+// Link:https://stackoverflow.com/questions/28929637/difference-and-uses-of-oncreate-oncreateview-and-onactivitycreated-in-fra#:~:text=The%20onCreate()%20method%20in%20a%20Fragment
