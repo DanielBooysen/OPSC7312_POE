@@ -48,34 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SIGN IN"
-        android:background="@drawable/my_button"
         android:paddingTop="16dp" />
-
-    <!-- Sign In with Google, Facebook, X -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:paddingTop="16dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_google_icon"
-            android:contentDescription="Google Logo" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_facebook_icon"
-            android:paddingLeft="16dp"
-            android:contentDescription="Facebook Logo" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_x_icon"
-            android:paddingLeft="16dp"
-            android:contentDescription="X Logo" />
-    </LinearLayout>
 
     <!-- Sign Up Link -->
     <TextView
@@ -88,5 +61,4 @@
         android:paddingTop="16dp"
         android:clickable="true"
         android:focusable="true" />
-
 </LinearLayout>

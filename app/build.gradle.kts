@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
-    //alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services") // Google Services plugin for Firebase
+    alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
 android {
@@ -28,13 +28,13 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17 // Updated to Java 17
+        targetCompatibility = JavaVersion.VERSION_17 // Updated to Java 17
     }
 
-    //kotlinOptions {
-    //    jvmTarget = "1.8"
-    //}
+    kotlinOptions {
+        jvmTarget = "17" // Consistent Kotlin JVM target version
+    }
 }
 
 // Declare explicit task dependencies to ensure correct order
@@ -60,14 +60,13 @@ dependencies {
     // Firebase Libraries
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
-    //implementation(libs.androidx.foundation.layout.android)
 
     // Testing Libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    //Retrofit for HTTP calls
+    // Retrofit for HTTP calls
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
