@@ -7,18 +7,21 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.QuerySnapshot
 
-abstract class FishEntryAdapter(private var fishEntries: List<FishEntry>) : RecyclerView.Adapter<FishEntryAdapter.FishEntryViewHolder>() {
+class FishEntryAdapter(private var fishEntries: MutableList<FishEntry>) : RecyclerView.Adapter<FishEntryAdapter.FishEntryViewHolder>() {
 
     class FishEntryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewSpecies: TextView = itemView.findViewById(R.id.textViewSpecies)
         val textViewLength: TextView = itemView.findViewById(R.id.textViewLength)
         val textViewWeight: TextView = itemView.findViewById(R.id.textViewWeight)
-        // Add more views as needed
+        val textViewBait: TextView = itemView.findViewById(R.id.textViewBait)
+        val textViewTimeOfDay: TextView = itemView.findViewById(R.id.textViewTimeofDay)
+        val textViewTime: TextView = itemView.findViewById(R.id.textViewTime)
+        val textViewWeather: TextView = itemView.findViewById(R.id.textViewWeather)
+        val textViewLocation: TextView = itemView.findViewById(R.id.textViewLocation)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FishEntryViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_fish_entry, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_fish_entry, parent, false)
         return FishEntryViewHolder(view)
     }
 
@@ -27,10 +30,19 @@ abstract class FishEntryAdapter(private var fishEntries: List<FishEntry>) : Recy
         holder.textViewSpecies.text = currentEntry.species
         holder.textViewLength.text = "Length: ${currentEntry.length}"
         holder.textViewWeight.text = "Weight: ${currentEntry.weight}"
-        // Bind other fields as needed
+        holder.textViewBait.text = "Bait Used: ${currentEntry.baitUsed}"
+        holder.textViewTimeOfDay.text = "Time of Day: ${currentEntry.timeOfDay}"
+        holder.textViewTime.text = "Time: ${currentEntry.time}"
+        holder.textViewWeather.text = "Weather: ${currentEntry.weather}"
+        holder.textViewLocation.text = "Location: ${currentEntry.location}"
     }
 
-    abstract fun setFishEntries(fishEntries: MutableList<FishEntry>): QuerySnapshot?
+    override fun getItemCount(): Int = fishEntries.size
 
-
+    // Method to update the list of fish entries
+    fun setFishEntries(newFishEntries: List<FishEntry>) {
+        fishEntries.clear()
+        fishEntries.addAll(newFishEntries)
+        notifyDataSetChanged()
+    }
 }

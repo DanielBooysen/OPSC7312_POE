@@ -1,5 +1,7 @@
 package com.example.opsc7312_poe
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -102,6 +104,8 @@ class FishLogging : AppCompatActivity() {
         buttonCancelEntry.setOnClickListener {
             // Logic to handle canceling the entry
             finish() // Simply close the activity
-        }
-    }
-}
+
+                    }
+                }
+            }
+

@@ -24,6 +24,33 @@
         android:layout_height="wrap_content"
         android:textSize="14sp" />
 
-    <!-- Add more TextViews for other fields if necessary -->
+    <TextView
+        android:id="@+id/textViewBait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textViewTimeofDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textViewWeather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
+
+   <TextView
+    android:id="@+id/textViewLocation"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="14sp" />
 
 </LinearLayout>
