@@ -61,6 +61,9 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
 
+    // Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:20.0.1")
+
     // Testing Libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
