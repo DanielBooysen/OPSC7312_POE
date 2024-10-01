@@ -97,6 +97,8 @@ fetchFishEntries()
     }
 
 
+
+
 }
 // This code has a On create which initializes Firebase, which at the end fetches the users logged data from Firestore
 // The following code was taken from Stack Overflow

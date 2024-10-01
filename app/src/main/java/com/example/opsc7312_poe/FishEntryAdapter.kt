@@ -7,9 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.QuerySnapshot
 
-class FishEntryAdapter(private var fishEntries: MutableList<FishEntry>) : RecyclerView.Adapter<FishEntryAdapter.FishEntryViewHolder>() {
+class FishEntryAdapter(
+    private var fishEntries: MutableList<FishEntry>,
+    private val userName: String? = null,
+    private val userEmail: String? = null
+) : RecyclerView.Adapter<FishEntryAdapter.FishEntryViewHolder>() {
 
     class FishEntryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val textViewUserName: TextView = itemView.findViewById(R.id.textViewUserName)
+        val textViewUserEmail: TextView = itemView.findViewById(R.id.textViewUserEmail)
         val textViewSpecies: TextView = itemView.findViewById(R.id.textViewSpecies)
         val textViewLength: TextView = itemView.findViewById(R.id.textViewLength)
         val textViewWeight: TextView = itemView.findViewById(R.id.textViewWeight)
@@ -35,6 +41,9 @@ class FishEntryAdapter(private var fishEntries: MutableList<FishEntry>) : Recycl
         holder.textViewTime.text = "Time: ${currentEntry.time}"
         holder.textViewWeather.text = "Weather: ${currentEntry.weather}"
         holder.textViewLocation.text = "Location: ${currentEntry.location}"
+
+        holder.textViewUserName.text = userName ?: ""
+        holder.textViewUserEmail.text = userEmail ?: ""
     }
 
     override fun getItemCount(): Int = fishEntries.size
