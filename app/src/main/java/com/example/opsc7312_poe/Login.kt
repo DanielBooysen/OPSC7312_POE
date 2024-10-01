@@ -39,6 +39,9 @@ class Login : AppCompatActivity() {
         }
 
         // Initialize Google Sign-In Options
+        // The following code was obtained from Google Identity
+        // Author: Google
+        // Link: https://developers.google.com/identity/sign-in/android/legacy-sign-in
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -143,6 +146,10 @@ class Login : AppCompatActivity() {
         }
     }
 
+    // Firebase authorization with Google
+    // The following code was derived from StackOverflow
+    // Author: StackOverflow
+    // Link: https://stackoverflow.com/questions/76790499/how-do-i-implement-a-login-with-google-firebase-in-my-java-application
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)

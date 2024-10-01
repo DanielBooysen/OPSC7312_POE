@@ -20,6 +20,9 @@ class LocationWeather : AppCompatActivity() {
     private val apiKey = "xzLgGLlJGYuYhFgLLa1HmvUIC2lyAM6G"
 
     // Location keys for the dams
+    // The following Keys were obtained from Postman
+    // Author: Postman
+    // Link: https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjjkeKBiu6IAxUuRaQEHXw7CTsQFnoECAkQAQ&url=https%3A%2F%2Fwww.postman.com%2F&usg=AOvVaw05sjAjE_hbftSn2Ii8YG6N&opi=89978449
     private val locationKeys = mapOf(
         "Bronkhorspruit Dam" to "298085",
         "Hartbeespoort Dam" to "1147636",
@@ -55,6 +58,10 @@ class LocationWeather : AppCompatActivity() {
         }
     }
 
+    // Fetch Weather function
+    // The following code was derived from tommorow
+    // Author: tommorow
+    // Link: https://www.tomorrow.io/a/faq/weather-api/how-to-use-weather-api-in-android-studio/
     private fun fetchWeather(service: WeatherService, damName: String, locationKey: String) {
         val currentTime = System.currentTimeMillis()
 
