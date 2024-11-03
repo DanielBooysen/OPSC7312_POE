@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visserholik</string>
+    <string name="login">Teken in</string>
+    <string name="welcome_message">Welkom by Visserholik!</string>
+</resources>

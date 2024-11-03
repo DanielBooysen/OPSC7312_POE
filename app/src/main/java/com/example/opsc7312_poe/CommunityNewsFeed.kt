@@ -1,8 +1,10 @@
 package com.example.opsc7312_poe
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,12 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-//import com.google.firebase.auth.FirebaseAuth
-
 class CommunityNewsFeed : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
     private lateinit var adapter: FishEntryAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,6 +40,13 @@ class CommunityNewsFeed : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         fetchFishEntries()
+
+        // Initialize and set the click listener for the location search button
+        val locationSearchButton = findViewById<Button>(R.id.locationSearchButton)
+        locationSearchButton.setOnClickListener {
+            val intent = Intent(this, LocationSearch::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun fetchFishEntries() {
@@ -79,27 +87,19 @@ class CommunityNewsFeed : AppCompatActivity() {
                                     .get()
                                     .addOnSuccessListener { userDocument ->
                                         if (userDocument.exists()) {
-                                            val userName =
-                                                userDocument.getString("name") ?: "Unknown User"
-                                            val userEmail =
-                                                userDocument.getString("email") ?: "Unknown Email"
+                                            val userName = userDocument.getString("name") ?: "Unknown User"
+                                            val userEmail = userDocument.getString("email") ?: "Unknown Email"
 
                                             fishEntry.userName = userName
                                             fishEntry.userEmail = userEmail
 
                                             adapter.setFishEntries(fishEntriesList)
                                         } else {
-                                            Log.d(
-                                                ContentValues.TAG,
-                                                "User not found for userId: $userId"
-                                            )
+                                            Log.d(ContentValues.TAG, "User not found for userId: $userId")
                                         }
                                     }
                                     .addOnFailureListener { exception ->
-                                        Log.e(
-                                            ContentValues.TAG,
-                                            "Error loading user data: ${exception.message}"
-                                        )
+                                        Log.e(ContentValues.TAG, "Error loading user data: ${exception.message}")
                                     }
                             }
                         }
@@ -110,11 +110,7 @@ class CommunityNewsFeed : AppCompatActivity() {
                 }
                 .addOnFailureListener { exception ->
                     Log.e(ContentValues.TAG, "Error loading fish entries: ${exception.message}")
-                    Toast.makeText(
-                        this,
-                        "Error loading logs: ${exception.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, "Error loading logs: ${exception.message}", Toast.LENGTH_SHORT).show()
                 }
         }
     }

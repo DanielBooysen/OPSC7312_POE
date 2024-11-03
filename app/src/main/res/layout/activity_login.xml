@@ -42,6 +42,20 @@
         android:inputType="textPassword"
         android:paddingTop="16dp" />
 
+
+    <TextView
+        android:id="@+id/fingerprintLoginTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login via Fingerprint"
+        android:textColor="#0000FF"
+        android:layout_gravity="center"
+        android:paddingTop="8dp"
+        android:clickable="true"
+        android:focusable="true" />
+
+
+
     <!-- Sign In Button -->
     <Button
         android:id="@+id/signInButton"
