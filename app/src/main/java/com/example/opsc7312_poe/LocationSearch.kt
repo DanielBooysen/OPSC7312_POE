@@ -60,8 +60,22 @@ class LocationSearch : AppCompatActivity() {
                     val results = StringBuilder()
                     for (document in querySnapshot.documents) {
                         val species = document.getString("species") ?: "Unknown Species"
+                        val length = document.getString("length") ?: "Unknown Length"
                         val weight = document.getString("weight") ?: "Unknown Weight"
-                        results.append("Species: $species, Weight: $weight\n")
+                        val baitUsed = document.getString("baitUsed") ?: "Unknown Bait"
+                        val timeOfDay = document.getString("timeOfDay") ?: "Unknown Time of Day"
+                        val time = document.getString("time") ?: "Unknown Time"
+                        val weather = document.getString("weather") ?: "Unknown Weather"
+
+                        // Append all the relevant details Rietto results
+                        results.append("Species: $species\n")
+                            .append("Length: $length cm\n")
+                            .append("Weight: $weight kg\n")
+                            .append("Bait Used: $baitUsed\n")
+                            .append("Time of Day: $timeOfDay\n")
+                            .append("Time: $time\n")
+                            .append("Weather: $weather\n")
+                            .append("Location: $location\n\n") // Additional line break for readability
                     }
                     resultsTextView.text = results.toString()
                 } else {

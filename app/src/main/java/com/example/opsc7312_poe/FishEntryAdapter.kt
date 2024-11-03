@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.QuerySnapshot
 
 class FishEntryAdapter(
     private var fishEntries: MutableList<FishEntry>,
@@ -34,8 +33,8 @@ class FishEntryAdapter(
     override fun onBindViewHolder(holder: FishEntryViewHolder, position: Int) {
         val currentEntry = fishEntries[position]
         holder.textViewSpecies.text = currentEntry.species
-        holder.textViewLength.text = "Length: ${currentEntry.length}"
-        holder.textViewWeight.text = "Weight: ${currentEntry.weight}"
+        holder.textViewLength.text = "Length: ${currentEntry.length} cm"  // Add "cm" for length
+        holder.textViewWeight.text = "Weight: ${currentEntry.weight} kg"  // Add "kg" for weight
         holder.textViewBait.text = "Bait Used: ${currentEntry.baitUsed}"
         holder.textViewTimeOfDay.text = "Time of Day: ${currentEntry.timeOfDay}"
         holder.textViewTime.text = "Time: ${currentEntry.time}"
