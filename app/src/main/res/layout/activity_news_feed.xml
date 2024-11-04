@@ -23,18 +23,36 @@
         tools:ignore="ExtraText" />
 
 
-    <!-- activity_news_feed location search.xml -->
-    <Button
-        android:id="@+id/locationSearchButton"
+
+    <!-- Horizontal LinearLayout to hold Location and Species search buttons -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Location Search"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"
-        android:backgroundTint="#FFA500"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="24dp"/>
-        />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="24dp">
+
+        <!-- activity_news_feed location search.xml -->
+        <Button
+            android:id="@+id/locationSearchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location Search"
+            android:backgroundTint="#FFA500"
+            android:textColor="@android:color/black"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/speciesSearchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFA500"
+            android:text="Species Search"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+
+
 
 
     <!-- Divider Line for Design -->
