@@ -47,6 +47,12 @@ class CommunityNewsFeed : AppCompatActivity() {
             val intent = Intent(this, LocationSearch::class.java)
             startActivity(intent)
         }
+
+        val speciesSearchButton = findViewById<Button>(R.id.speciesSearchButton)
+        speciesSearchButton.setOnClickListener {
+            val intent = Intent(this, SpeciesSearch::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun fetchFishEntries() {
