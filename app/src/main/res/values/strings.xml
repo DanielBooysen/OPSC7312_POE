@@ -5,6 +5,43 @@
 
     <string name="default_web_client_id">YOUR_WEB_CLIENT_ID_FROM_GOOGLE_SERVICES</string>
 
+    <!-- Prompt for selecting a location -->
+    <string name="select_location_prompt">Select a location</string>
+
+    <!-- Language selection prompt -->
+    <string name="language_text">Language</string>
+
+    <!-- Additional UI Text -->
+    <string name="settings_title">Settings</string>
+    <string name="location_permission">Location Permission</string>
+    <string name="always_on">Always on</string>
+    <string name="while_using">While using</string>
+    <string name="location_off">Off</string>
+    <string name="enable_notifications">Enable Push Notifications</string>
+    <string name="clear_data">Clear Data</string>
+    <string name="clear_data_disclaimer">*Deletes all data related to this profile</string>
+    <string name="home">Home</string>
+    <string name="add_entry">Add Entry</string>
+    <string name="length_label">Length (cm)</string>
+    <string name="weight_label">Weight (kg)</string>
+    <string name="bait_used_label">Bait Used</string>
+    <string name="time_of_day_label">Time of Day</string>
+    <string name="time_label">Time</string>
+    <string name="weather_label">Weather</string>
+    <string name="location_label">Location</string>
+    <string name="select_image">Select Image</string>
+    <string name="add_button">Add</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="sign_in">SIGN IN TO YOUR ACCOUNT</string>
+    <string name="register">CREATE A NEW ACCOUNT</string>
+    <string name="sign_in_button">SIGN IN</string>
+    <string name="register_button">REGISTER</string>
+    <string name="google_sign_in_button">SIGN IN WITH GOOGLE</string>
+    <string name="sign_up_prompt">Don\'t\ have an account? SIGN UP</string>
+    <string name="linked_accounts">Linked accounts</string>
+    <string name="update_password">Update Password</string>
+    <string name="confirm_button">Confirm</string>
+
     <!-- Fish species options -->
     <string-array name="fish_species">
         <item>Common Carp</item>
@@ -43,12 +80,17 @@
     </string-array>
 
     <!-- Dam location options -->
-    <string name="select_location_prompt">Select a location</string>
     <string-array name="dam_locations">
         <item>Roodeplaat Dam</item>
         <item>Rietvlei Dam</item>
         <item>Hartebeespoort Dam</item>
         <item>Bronkhorstspruit Dam</item>
         <item>Vaal Dam</item>
+    </string-array>
+
+    <!-- Language options -->
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Afrikaans</item>
     </string-array>
 </resources>

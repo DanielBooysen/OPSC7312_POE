@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -21,9 +21,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OPSC7312_POE"
         tools:targetApi="31">
+
+        <service
+            android:name=".FirebaseMsgService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".LocationSearch"
             android:exported="false" />
+
         <!-- The Login Activity set as Launcher (starting point of the app) -->
         <activity
             android:name=".Login"
@@ -33,7 +43,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Other activities -->
+        </activity>
+
+        <!-- Other activities -->
         <activity android:name=".Register" />
         <activity android:name=".Home" />
         <activity android:name=".Profile" />

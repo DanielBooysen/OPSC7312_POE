@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application name -->
+    <string name="app_name">Fishaholic</string>
+
+    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID_FROM_GOOGLE_SERVICES</string>
+
+    <!-- Prompt for selecting a location -->
+    <string name="select_location_prompt">Kies \'n\ ligging</string>
+
+    <!-- Language selection prompt -->
+    <string name="language_text">Taal</string>
+
+    <!-- Additional UI Text -->
+    <string name="settings_title">Instellings</string>
+    <string name="location_permission">Liggingstoestemming</string>
+    <string name="always_on">Altyd aan</string>
+    <string name="while_using">Tydens gebruik</string>
+    <string name="location_off">Af</string>
+    <string name="enable_notifications">Stel kennisgewings in</string>
+    <string name="clear_data">Vee Data uit</string>
+    <string name="clear_data_disclaimer">*Verwyder alle data wat verband hou met hierdie profiel</string>
+    <string name="home">Tuis</string>
+    <string name="add_entry">Voeg inskrywing by</string>
+    <string name="length_label">Lengte (cm)</string>
+    <string name="weight_label">Gewig (kg)</string>
+    <string name="bait_used_label">Aas gebruik</string>
+    <string name="time_of_day_label">Tyd van die dag</string>
+    <string name="time_label">Tyd</string>
+    <string name="weather_label">Weer</string>
+    <string name="location_label">Ligging</string>
+    <string name="select_image">Kies Beeld</string>
+    <string name="add_button">Voeg By</string>
+    <string name="cancel_button">Kanselleer</string>
+    <string name="sign_in">TEKEN IN OP JOU REKENING</string>
+    <string name="register">SKEP \'N\ NUWE REKENING</string>
+    <string name="sign_in_button">TEKEN IN</string>
+    <string name="register_button">REGISTREER</string>
+    <string name="google_sign_in_button">TEKEN IN MET GOOGLE</string>
+    <string name="sign_up_prompt">Het jy nie \'n\ rekening nie? REGISTREER</string>
+    <string name="linked_accounts">Gekoppelde rekeninge</string>
+    <string name="update_password">Werk wagwoord op</string>
+    <string name="confirm_button">Bevestig</string>
+
+    <!-- Fish species options -->
+    <string-array name="fish_species">
+        <item>Gewone Karp</item>
+        <item>Graskarp</item>
+        <item>Blou Kurper</item>
+        <item>Rooibors Kurper</item>
+        <item>Kanarie Kurper</item>
+        <item>Grootbek Swartbaar</item>
+        <item>Kleinbek Swartbaar</item>
+        <item>Skerptand Baber</item>
+        <item>Grootbek Geelvis</item>
+        <item>Kleinbek Geelvis</item>
+        <item>Moddervis</item>
+        <item>Reënboog Forel</item>
+        <item>Bruin Forel</item>
+    </string-array>
+
+    <!-- Time of day options -->
+    <string-array name="time_of_day">
+        <item>Vroegoggend</item>
+        <item>Laatoggend</item>
+        <item>Vroegaand</item>
+        <item>Laataand</item>
+        <item>Vroegaand</item>
+        <item>Laataand</item>
+    </string-array>
+
+    <!-- Weather conditions options -->
+    <string-array name="weather_conditions">
+        <item>Sonnig</item>
+        <item>Reënerig</item>
+        <item>Winderig</item>
+        <item>Stormagtig</item>
+        <item>Sneeu</item>
+        <item>Bewolk</item>
+    </string-array>
+
+    <!-- Dam location options -->
+    <string-array name="dam_locations">
+        <item>Roodeplaat Dam</item>
+        <item>Rietvlei Dam</item>
+        <item>Hartebeespoort Dam</item>
+        <item>Bronkhorstspruit Dam</item>
+        <item>Vaal Dam</item>
+    </string-array>
+
+    <!-- Language options -->
+    <string-array name="language_options">
+        <item>Engels</item>
+        <item>Afrikaans</item>
+    </string-array>
+</resources>

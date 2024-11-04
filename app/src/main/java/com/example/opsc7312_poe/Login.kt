@@ -21,6 +21,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.android.gms.common.SignInButton
 import java.util.concurrent.Executor
+import java.util.Locale
+import android.content.res.Configuration
+import android.preference.PreferenceManager
 
 class Login : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -31,6 +34,9 @@ class Login : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Load saved language setting before setting the content view
+        loadLocale()
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
@@ -74,6 +80,18 @@ class Login : AppCompatActivity() {
         }
     }
 
+    private fun loadLocale() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val languageCode = sharedPreferences.getString("language", "en") ?: "en"
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+
+        val config = Configuration(resources.configuration)
+        config.setLocale(locale)
+        config.setLayoutDirection(locale) // For RTL languages
+        resources.updateConfiguration(config, resources.displayMetrics)
+    }
+
     private fun setupBiometricAuthentication() {
         val biometricManager = BiometricManager.from(this)
         when (biometricManager.canAuthenticate(Authenticators.BIOMETRIC_STRONG or Authenticators.DEVICE_CREDENTIAL)) {
@@ -115,11 +133,10 @@ class Login : AppCompatActivity() {
             }
         })
 
-        // Configure the biometric prompt to allow both fingerprint and face recognition
+        // Configure the biometric prompt without setting a negative button
         promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("Login with Biometrics")
             .setSubtitle("Use your face or fingerprint to login")
-            .setNegativeButtonText("Cancel")
             .setAllowedAuthenticators(Authenticators.BIOMETRIC_STRONG or Authenticators.DEVICE_CREDENTIAL)
             .build()
 
