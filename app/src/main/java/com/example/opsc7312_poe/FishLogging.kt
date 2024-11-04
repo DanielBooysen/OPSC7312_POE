@@ -12,8 +12,6 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -32,10 +30,10 @@ class FishLogging : AppCompatActivity() {
     private lateinit var spinnerLocation: Spinner
     private lateinit var buttonAddEntry: Button
     private lateinit var buttonCancelEntry: Button
-    private lateinit var buttonSelectImage: Button // The new button for selecting an image
+    private lateinit var buttonSelectImage: Button
     private lateinit var imageViewFish: ImageView
 
-    private lateinit var imageUri: Uri
+    private var imageUri: Uri? = null // Make imageUri nullable to handle optional image selection
     private val storageReference = FirebaseStorage.getInstance().reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,10 +55,8 @@ class FishLogging : AppCompatActivity() {
         spinnerLocation = findViewById(R.id.spinnerLocation)
         buttonAddEntry = findViewById(R.id.buttonAddEntry)
         buttonCancelEntry = findViewById(R.id.buttonCancelEntry)
-        buttonSelectImage = findViewById(R.id.buttonSelectImage) // Initialize the Select Image button
+        buttonSelectImage = findViewById(R.id.buttonSelectImage)
         imageViewFish = findViewById(R.id.imageViewFish)
-
-
 
         // Button click listeners
         buttonSelectImage.setOnClickListener {
@@ -84,7 +80,8 @@ class FishLogging : AppCompatActivity() {
 
             val user = auth.currentUser
             if (user != null) {
-                val fishEntry = hashMapOf(
+                // Create FishEntry map
+                val fishEntry = hashMapOf<String, Any>(
                     "species" to fishSpecies,
                     "length" to length,
                     "weight" to weight,
@@ -96,22 +93,16 @@ class FishLogging : AppCompatActivity() {
                     "userId" to user.uid
                 )
 
-                if (::imageUri.isInitialized) {
-                    uploadImageToFirebase(imageUri) { imageUrl ->
+                // Check if an image URI is present
+                if (imageUri != null) {
+                    // If image is selected, upload it and add URL to entry
+                    uploadImageToFirebase(imageUri!!) { imageUrl ->
                         fishEntry["imageUrl"] = imageUrl
-
-                        firestore.collection("fishEntries")
-                            .add(fishEntry)
-                            .addOnSuccessListener {
-                                Toast.makeText(this, "Log added, Check Journal", Toast.LENGTH_SHORT).show()
-                                finish()
-                            }
-                            .addOnFailureListener { exception ->
-                                Toast.makeText(this, "Failed to add log: ${exception.message}", Toast.LENGTH_SHORT).show()
-                            }
+                        addEntryToFirestore(fishEntry)
                     }
                 } else {
-                    Toast.makeText(this, "Please select an image.", Toast.LENGTH_SHORT).show()
+                    // If no image is selected, directly add entry without image URL
+                    addEntryToFirestore(fishEntry)
                 }
             } else {
                 Toast.makeText(this, "Please log in to add entries.", Toast.LENGTH_SHORT).show()
@@ -157,6 +148,19 @@ class FishLogging : AppCompatActivity() {
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Image upload failed", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    // Function to add entry to Firestore
+    private fun addEntryToFirestore(fishEntry: HashMap<String, Any>) {
+        firestore.collection("fishEntries")
+            .add(fishEntry)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Log added, Check Journal", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Failed to add log: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }
