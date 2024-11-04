@@ -8,6 +8,8 @@ import android.preference.PreferenceManager
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
+import android.widget.Switch
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -43,6 +45,16 @@ class Settings : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+
+        val notificationSwitch: Switch = findViewById(R.id.switch_notifications)
+
+        // Set the switch to the current preference
+        notificationSwitch.isChecked = sharedPreferences.getBoolean("push_notifications", false)
+
+        // Listen for changes to the switch
+        notificationSwitch.setOnCheckedChangeListener { _, isChecked ->
+            sharedPreferences.edit().putBoolean("push_notifications", isChecked).apply()
         }
     }
 

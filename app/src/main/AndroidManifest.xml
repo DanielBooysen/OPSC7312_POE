@@ -5,10 +5,11 @@
     <!-- Permissions needed for internet access -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +22,14 @@
         android:theme="@style/Theme.OPSC7312_POE"
         tools:targetApi="31">
 
+        <service
+            android:name=".FirebaseMsgService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".LocationSearch"
             android:exported="false" />
@@ -31,6 +40,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,21 +49,17 @@
         <activity android:name=".Register" />
         <activity android:name=".Home" />
         <activity android:name=".Profile" />
-
-        <!-- Settings activity with configChanges for locale updates -->
-        <activity
-            android:name=".Settings"
-            android:configChanges="locale|layoutDirection" />
-
+        <activity android:name=".Settings" />
         <activity android:name=".CommunityNewsFeed" />
         <activity android:name=".SpeciesSearch" />
         <activity android:name=".FishLogging" />
         <activity android:name=".Journal" />
-        <activity android:name=".LocationWeather" />
+        <activity android:name=".LocationWeather" /> <!-- Metadata for Google Sign-In -->
 
-        <!-- Metadata for Google Sign-In -->
+
         <meta-data
             android:name="com.google.android.gms.auth.api.signin.API_KEY"
             android:value="@string/default_web_client_id" />
     </application>
+
 </manifest>

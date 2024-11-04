@@ -60,6 +60,8 @@ dependencies {
     // Firebase Libraries
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-messaging:23.1.2")
+    implementation("com.google.firebase:firebase-analytics:21.4.0")
 
     // Google Sign-In
     implementation("com.google.android.gms:play-services-auth:20.0.1")
