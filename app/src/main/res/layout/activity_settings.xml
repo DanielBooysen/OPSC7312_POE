@@ -73,34 +73,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Notifications Radio Group -->
-            <TextView
-                android:id="@+id/notifications_title"
+            <Switch
+                android:id="@+id/switch_notifications"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notifications"
-                android:textSize="16sp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="8dp"/>
-
-            <RadioGroup
-                android:id="@+id/notifications_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/notifications_on"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="On"/>
-
-                <RadioButton
-                    android:id="@+id/notifications_off"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Off"/>
-            </RadioGroup>
+                android:text="Enable Push Notifications" />
         </LinearLayout>
     </LinearLayout>
 
