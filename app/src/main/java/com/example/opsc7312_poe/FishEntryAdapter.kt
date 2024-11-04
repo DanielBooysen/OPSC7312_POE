@@ -32,6 +32,8 @@ class FishEntryAdapter(
 
     override fun onBindViewHolder(holder: FishEntryViewHolder, position: Int) {
         val currentEntry = fishEntries[position]
+        holder.textViewUserName.text = currentEntry.userName
+        holder.textViewUserEmail.text = currentEntry.userEmail
         holder.textViewSpecies.text = currentEntry.species
         holder.textViewLength.text = "Length: ${currentEntry.length} cm"  // Add "cm" for length
         holder.textViewWeight.text = "Weight: ${currentEntry.weight} kg"  // Add "kg" for weight
@@ -40,9 +42,6 @@ class FishEntryAdapter(
         holder.textViewTime.text = "Time: ${currentEntry.time}"
         holder.textViewWeather.text = "Weather: ${currentEntry.weather}"
         holder.textViewLocation.text = "Location: ${currentEntry.location}"
-
-        holder.textViewUserName.text = userName ?: ""
-        holder.textViewUserEmail.text = userEmail ?: ""
     }
 
     override fun getItemCount(): Int = fishEntries.size
