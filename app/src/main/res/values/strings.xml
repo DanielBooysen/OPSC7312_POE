@@ -43,6 +43,7 @@
     </string-array>
 
     <!-- Dam location options -->
+    <string name="select_location_prompt">Select a location</string>
     <string-array name="dam_locations">
         <item>Roodeplaat Dam</item>
         <item>Rietvlei Dam</item>

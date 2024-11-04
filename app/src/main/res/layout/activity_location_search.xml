@@ -4,32 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity=""> <!-- Center child elements -->
+    android:gravity="center_horizontal">
 
-    <LinearLayout
+    <!-- Location Dropdown Spinner -->
+    <Spinner
+        android:id="@+id/locationSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
-
-        <EditText
-            android:id="@+id/locationSearchEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Enter Dam Location"
-            android:inputType="text" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:text="Search"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/holo_orange_light"
-        android:layout_gravity="center" /> <!-- Center button -->
+        android:layout_marginBottom="16dp"
+        android:prompt="@string/select_location_prompt" />
 
     <Button
         android:id="@+id/okButton"
@@ -39,7 +22,7 @@
         android:textColor="@android:color/black"
         android:layout_marginTop="16dp"
         android:backgroundTint="@android:color/holo_orange_light"
-        android:layout_gravity="center" /> <!-- Center button -->
+        android:layout_gravity="center" />
 
     <Button
         android:id="@+id/backButton"
@@ -49,7 +32,7 @@
         android:textColor="@android:color/black"
         android:layout_marginTop="16dp"
         android:backgroundTint="@android:color/holo_orange_light"
-        android:layout_gravity="center" /> <!-- Center button -->
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/resultsTextView"

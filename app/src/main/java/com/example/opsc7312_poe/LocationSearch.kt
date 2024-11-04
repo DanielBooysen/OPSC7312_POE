@@ -1,46 +1,52 @@
 package com.example.opsc7312_poe
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LocationSearch : AppCompatActivity() {
 
-    private lateinit var locationSearchEditText: EditText
-    private lateinit var searchButton: Button
+    private lateinit var locationSpinner: Spinner
     private lateinit var okButton: Button
     private lateinit var backButton: Button
     private lateinit var resultsTextView: TextView
-    private val validDams = listOf("Roodeplaat Dam", "Rietvlei Dam", "Hartebeespoort Dam", "Bronkhorstspruit Dam", "Vaal Dam")
     private val firestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location_search)
 
-        locationSearchEditText = findViewById(R.id.locationSearchEditText)
-        searchButton = findViewById(R.id.searchButton)
+        locationSpinner = findViewById(R.id.locationSpinner)
         okButton = findViewById(R.id.okButton)  // Initialize OK button
         backButton = findViewById(R.id.backButton)  // Initialize Back button
         resultsTextView = findViewById(R.id.resultsTextView)
 
-        // Search button click listener
-        searchButton.setOnClickListener {
-            val location = locationSearchEditText.text.toString().trim()
-            if (location in validDams) {
+        // Set up the Spinner with locations array
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.dam_locations,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            locationSpinner.adapter = adapter
+        }
+
+        // Spinner item selected listener
+        locationSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val location = parent.getItemAtPosition(position).toString()
                 searchCatchesByLocation(location)
-            } else {
-                resultsTextView.text = "Unknown location. Please enter a valid dam name."
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                resultsTextView.text = "Please select a location"
             }
         }
 
-        // OK button click listener to clear the search field
+        // OK button click listener to clear the results view
         okButton.setOnClickListener {
-            locationSearchEditText.text.clear() // Clear the search field
             resultsTextView.text = "Results will appear here" // Reset results message
             Toast.makeText(this, "Search cleared", Toast.LENGTH_SHORT).show() // Optional feedback
         }
@@ -67,7 +73,7 @@ class LocationSearch : AppCompatActivity() {
                         val time = document.getString("time") ?: "Unknown Time"
                         val weather = document.getString("weather") ?: "Unknown Weather"
 
-                        // Append all the relevant details Rietto results
+                        // Append all the relevant details to results
                         results.append("Species: $species\n")
                             .append("Length: $length cm\n")
                             .append("Weight: $weight kg\n")
@@ -75,7 +81,7 @@ class LocationSearch : AppCompatActivity() {
                             .append("Time of Day: $timeOfDay\n")
                             .append("Time: $time\n")
                             .append("Weather: $weather\n")
-                            .append("Location: $location\n\n") // Additional line break for readability
+                            .append("Location: $location\n\n")
                     }
                     resultsTextView.text = results.toString()
                 } else {
