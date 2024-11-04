@@ -13,6 +13,7 @@ class LocationSearch : AppCompatActivity() {
     private lateinit var backButton: Button
     private lateinit var resultsTextView: TextView
     private val firestore = FirebaseFirestore.getInstance()
+    private var selectedLocation: String? = null // Variable to store selected location
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +37,8 @@ class LocationSearch : AppCompatActivity() {
         // Spinner item selected listener
         locationSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                val location = parent.getItemAtPosition(position).toString()
-                searchCatchesByLocation(location)
+                // Store the selected location
+                selectedLocation = parent.getItemAtPosition(position).toString()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -45,10 +46,13 @@ class LocationSearch : AppCompatActivity() {
             }
         }
 
-        // OK button click listener to clear the results view
+        // OK button click listener to search for catches at the selected location
         okButton.setOnClickListener {
-            resultsTextView.text = "Results will appear here" // Reset results message
-            Toast.makeText(this, "Search cleared", Toast.LENGTH_SHORT).show() // Optional feedback
+            if (selectedLocation != null) {
+                searchCatchesByLocation(selectedLocation!!) // Search using the selected location
+            } else {
+                Toast.makeText(this, "Please select a location first", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Back button click listener

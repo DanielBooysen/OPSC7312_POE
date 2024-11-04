@@ -63,6 +63,7 @@ dependencies {
 
     // Google Sign-In
     implementation("com.google.android.gms:play-services-auth:20.0.1")
+    implementation(libs.firebase.storage.ktx)
 
     // Testing Libraries
     testImplementation(libs.junit)
