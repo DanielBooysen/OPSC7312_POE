@@ -6,18 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- App Logo at the top of the screen -->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/logo" />
 
-    <!-- Settings Title -->
     <TextView
         android:id="@+id/settings_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:text="@string/settings_title"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -33,12 +31,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Location Permissions Radio Group -->
             <TextView
                 android:id="@+id/location_permission_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location Permission"
+                android:text="@string/location_permission"
                 android:textSize="16sp"
                 android:layout_marginBottom="8dp"/>
 
@@ -52,19 +49,19 @@
                     android:id="@+id/always_on"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Always on"/>
+                    android:text="@string/always_on"/>
 
                 <RadioButton
                     android:id="@+id/while_using"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="While using"/>
+                    android:text="@string/while_using"/>
 
                 <RadioButton
                     android:id="@+id/location_off"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Off"/>
+                    android:text="@string/location_off"/>
             </RadioGroup>
         </LinearLayout>
 
@@ -77,32 +74,41 @@
                 android:id="@+id/switch_notifications"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enable Push Notifications" />
+                android:text="@string/enable_notifications" />
+
+            <TextView
+                android:id="@+id/languageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/language_text" />
+
+            <Spinner
+                android:id="@+id/languageSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/language_options" />
+
         </LinearLayout>
     </LinearLayout>
 
-
-    <!-- Clear Data Button -->
     <Button
         android:id="@+id/clear_data_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Clear Data"
+        android:text="@string/clear_data"
         android:backgroundTint="@android:color/holo_red_light"
         android:textColor="@android:color/white"
         android:layout_marginTop="24dp"/>
 
-    <!-- Disclaimer Text -->
     <TextView
         android:id="@+id/clear_data_disclaimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="*Deletes all data related to this profile"
+        android:text="@string/clear_data_disclaimer"
         android:textSize="12sp"
         android:layout_gravity="center"
         android:layout_marginTop="8dp"/>
 
-    <!-- Bottom Navigation -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -115,12 +121,6 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_home_icon"
-        android:contentDescription="Home"/>
+            android:contentDescription="@string/home"/>
     </LinearLayout>
 </LinearLayout>
-
-    <!-- This XML code outlines the layout for Settings Activity
-    // The following code is inspired by Android Settings UI guidelines
-    // Author: Android Developers
-    // Link: https://developer.android.com/guide/topics/ui/settings
-    -->

@@ -5,7 +5,6 @@
     <!-- Permissions needed for internet access -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
@@ -19,33 +18,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OPSC7312_POE"
         tools:targetApi="31">
+
         <activity
             android:name=".LocationSearch"
             android:exported="false" />
+
         <!-- The Login Activity set as Launcher (starting point of the app) -->
         <activity
             android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Other activities -->
+        </activity>
+
+        <!-- Other activities -->
         <activity android:name=".Register" />
         <activity android:name=".Home" />
         <activity android:name=".Profile" />
-        <activity android:name=".Settings" />
+
+        <!-- Settings activity with configChanges for locale updates -->
+        <activity
+            android:name=".Settings"
+            android:configChanges="locale|layoutDirection" />
+
         <activity android:name=".CommunityNewsFeed" />
         <activity android:name=".SpeciesSearch" />
         <activity android:name=".FishLogging" />
         <activity android:name=".Journal" />
-        <activity android:name=".LocationWeather" /> <!-- Metadata for Google Sign-In -->
+        <activity android:name=".LocationWeather" />
 
-
+        <!-- Metadata for Google Sign-In -->
         <meta-data
             android:name="com.google.android.gms.auth.api.signin.API_KEY"
             android:value="@string/default_web_client_id" />
     </application>
-
 </manifest>
