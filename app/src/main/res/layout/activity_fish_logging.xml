@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@android:color/transparent"
+    android:padding="25dp"
     android:gravity="center">
+    <!-- android:background="@android:color/transparent" -->
 
     <!-- Heading -->
     <TextView
@@ -16,8 +16,10 @@
         android:layout_height="wrap_content"
         android:text="Add Entry"
         android:textSize="24sp"
+        android:padding="16dp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"
+        android:background="@android:color/holo_orange_light"
         android:textColor="@android:color/black" />
 
     <LinearLayout
@@ -32,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fish Species"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:layout_marginBottom="4dp"/>
         <Spinner
             android:id="@+id/spinnerFishSpecies"
@@ -40,14 +42,14 @@
             android:layout_height="wrap_content"
             android:entries="@array/fish_species"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@android:color/darker_gray"/>
+            android:backgroundTint="@android:color/holo_orange_light"/>
 
         <!-- Label and Input for Length -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Length (cm)"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:layout_marginBottom="4dp"/>
         <EditText
             android:id="@+id/inputLength"
@@ -56,14 +58,14 @@
             android:hint="Length (cm)"
             android:inputType="numberDecimal"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@android:color/darker_gray"/>
+            android:backgroundTint="@android:color/holo_orange_light"/>
 
         <!-- Label and Input for Weight -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Weight (kg)"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:layout_marginBottom="4dp"/>
         <EditText
             android:id="@+id/inputWeight"
@@ -72,14 +74,14 @@
             android:hint="Weight (kg)"
             android:inputType="numberDecimal"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@android:color/darker_gray"/>
+            android:backgroundTint="@android:color/holo_orange_light"/>
 
         <!-- Label and Input for Bait Used -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bait"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:layout_marginBottom="4dp"/>
         <EditText
             android:id="@+id/inputBaitUsed"
@@ -87,14 +89,14 @@
             android:layout_height="wrap_content"
             android:hint="Bait Used"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@android:color/darker_gray"/>
+            android:backgroundTint="@android:color/holo_orange_light"/>
 
         <!-- Label and Dropdown for Time of Day -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time of Day"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:layout_marginBottom="4dp"/>
         <Spinner
             android:id="@+id/spinnerTimeOfDay"
@@ -102,14 +104,14 @@
             android:layout_height="wrap_content"
             android:entries="@array/time_of_day"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@android:color/darker_gray"/>
+            android:backgroundTint="@android:color/holo_orange_light"/>
 
         <!-- Label and Input for Time -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:layout_marginBottom="4dp"/>
         <EditText
             android:id="@+id/inputTime"
@@ -118,14 +120,14 @@
             android:hint="Time (e.g., 14:30)"
             android:inputType="time"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@android:color/darker_gray"/>
+            android:backgroundTint="@android:color/holo_orange_light"/>
 
         <!-- Label and Dropdown for Weather -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Weather"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:layout_marginBottom="4dp"/>
         <Spinner
             android:id="@+id/spinnerWeather"
@@ -133,14 +135,14 @@
             android:layout_height="wrap_content"
             android:entries="@array/weather_conditions"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@android:color/darker_gray"/>
+            android:backgroundTint="@android:color/holo_orange_light"/>
 
         <!-- Label and Dropdown for Location -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Location"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:layout_marginBottom="4dp"/>
         <Spinner
             android:id="@+id/spinnerLocation"
@@ -148,7 +150,7 @@
             android:layout_height="wrap_content"
             android:entries="@array/dam_locations"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@android:color/darker_gray"/>
+            android:backgroundTint="@android:color/holo_orange_light"/>
 
         <!-- Button for Selecting Image -->
         <Button
@@ -158,8 +160,8 @@
             android:text="Select Image"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="@android:color/holo_orange_dark"
-            android:textColor="@android:color/white"/>
+            android:backgroundTint="@android:color/holo_orange_light"
+            android:textColor="@android:color/black"/>
 
         <!-- ImageView for Displaying Selected Image -->
         <ImageView
@@ -180,8 +182,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add"
-                android:backgroundTint="@android:color/holo_orange_dark"
-                android:textColor="@android:color/white"/>
+                android:backgroundTint="@android:color/holo_orange_light"
+                android:textColor="@android:color/black"/>
 
             <Button
                 android:id="@+id/buttonCancelEntry"
@@ -189,8 +191,8 @@
                 android:layout_height="wrap_content"
                 android:text="Cancel"
                 android:layout_marginStart="16dp"
-                android:backgroundTint="@android:color/holo_orange_dark"
-                android:textColor="@android:color/white"/>
+                android:backgroundTint="@android:color/holo_orange_light"
+                android:textColor="@android:color/black"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

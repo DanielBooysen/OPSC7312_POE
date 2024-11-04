@@ -6,25 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/white">
+    android:padding="25dp">
+    <!--android:background="@color/white"-->
 
+
+    <!-- Horizontal LinearLayout to hold Location and Species search buttons -->
     <TextView
         android:id="@+id/newsFeedHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light"
         android:gravity="center"
+        android:padding="20dp"
         android:text="Community Catches"
         android:textColor="@android:color/black"
-        android:background="#FFA500"
-        android:textSize="24sp"
-        android:padding="16dp"
+        android:textSize="25sp"
         android:textStyle="bold"
         tools:ignore="ExtraText" />
 
-
-
-    <!-- Horizontal LinearLayout to hold Location and Species search buttons -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Location Search"
-            android:backgroundTint="#FFA500"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:textColor="@android:color/black"
             android:layout_marginEnd="8dp"/>
 
@@ -46,7 +45,7 @@
             android:id="@+id/speciesSearchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#FFA500"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:text="Species Search"
             android:textColor="@android:color/black" />
     </LinearLayout>
@@ -59,7 +58,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
+        android:background="@android:color/holo_orange_light"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp" />
 
