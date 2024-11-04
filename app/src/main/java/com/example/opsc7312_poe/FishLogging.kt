@@ -1,19 +1,23 @@
 package com.example.opsc7312_poe
 
-import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import java.util.*
 
 class FishLogging : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -28,11 +32,14 @@ class FishLogging : AppCompatActivity() {
     private lateinit var spinnerLocation: Spinner
     private lateinit var buttonAddEntry: Button
     private lateinit var buttonCancelEntry: Button
+    private lateinit var buttonSelectImage: Button // The new button for selecting an image
     private lateinit var imageViewFish: ImageView
+
+    private lateinit var imageUri: Uri
+    private val storageReference = FirebaseStorage.getInstance().reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_fish_logging)
 
         // Initialize Firebase authentication and Firestore
@@ -50,11 +57,17 @@ class FishLogging : AppCompatActivity() {
         spinnerLocation = findViewById(R.id.spinnerLocation)
         buttonAddEntry = findViewById(R.id.buttonAddEntry)
         buttonCancelEntry = findViewById(R.id.buttonCancelEntry)
+        buttonSelectImage = findViewById(R.id.buttonSelectImage) // Initialize the Select Image button
         imageViewFish = findViewById(R.id.imageViewFish)
 
+
+
         // Button click listeners
+        buttonSelectImage.setOnClickListener {
+            openGallery() // Open the gallery when the button is clicked
+        }
+
         buttonAddEntry.setOnClickListener {
-            // Logic to handle adding the fish entry
             val fishSpecies = spinnerFishSpecies.selectedItem.toString()
             val length = inputLength.text.toString()
             val weight = inputWeight.text.toString()
@@ -64,16 +77,13 @@ class FishLogging : AppCompatActivity() {
             val weather = spinnerWeather.selectedItem.toString()
             val location = spinnerLocation.selectedItem.toString()
 
-            // Simple validation
             if (fishSpecies.isEmpty() || length.isEmpty() || weight.isEmpty() || baitUsed.isEmpty() || time.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Check if the user is logged in before adding the entry
             val user = auth.currentUser
             if (user != null) {
-                // Prepare the fish entry data
                 val fishEntry = hashMapOf(
                     "species" to fishSpecies,
                     "length" to length,
@@ -83,50 +93,74 @@ class FishLogging : AppCompatActivity() {
                     "time" to time,
                     "weather" to weather,
                     "location" to location,
-                    "userId" to user.uid // Associate the entry with the user
+                    "userId" to user.uid
                 )
 
-                // Save the entry to Firestore and local database
-                firestore.collection("fishEntries")
-                    .add(fishEntry)
-                    .addOnSuccessListener {
-                        val dbHelper = DatabaseHelper(this)
-                        val success = dbHelper.insertFishEntry(
-                            userId = user.uid,
-                            fishSpecies = spinnerFishSpecies.selectedItem.toString(),
-                            length = inputLength.text.toString(),
-                            weight = inputWeight.text.toString(),
-                            baitUsed = inputBaitUsed.text.toString(),
-                            timeOfDay = spinnerTimeOfDay.selectedItem.toString(),
-                            time = inputTime.text.toString(),
-                            weather = spinnerWeather.selectedItem.toString(),
-                            location = spinnerLocation.selectedItem.toString()
-                        )
+                if (::imageUri.isInitialized) {
+                    uploadImageToFirebase(imageUri) { imageUrl ->
+                        fishEntry["imageUrl"] = imageUrl
 
-                        if (success) {
-                            Toast.makeText(this, "Entry saved offline", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(this, "Failed to save entry", Toast.LENGTH_SHORT).show()
-                        }
-
-                        Toast.makeText(this, "Log added, Check Journal", Toast.LENGTH_SHORT).show()
-                        finish() // Close the activity or clear fields if needed
+                        firestore.collection("fishEntries")
+                            .add(fishEntry)
+                            .addOnSuccessListener {
+                                Toast.makeText(this, "Log added, Check Journal", Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
+                            .addOnFailureListener { exception ->
+                                Toast.makeText(this, "Failed to add log: ${exception.message}", Toast.LENGTH_SHORT).show()
+                            }
                     }
-                    .addOnFailureListener { exception ->
-                        Toast.makeText(this, "Failed to add log: ${exception.message}", Toast.LENGTH_SHORT).show()
-                    }
+                } else {
+                    Toast.makeText(this, "Please select an image.", Toast.LENGTH_SHORT).show()
+                }
             } else {
                 Toast.makeText(this, "Please log in to add entries.", Toast.LENGTH_SHORT).show()
             }
         }
 
         buttonCancelEntry.setOnClickListener {
-            // Logic to handle canceling the entry
-            finish() // Simply close the activity
+            finish()
+        }
+    }
 
-                    }
+    // Open gallery to select image
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        if (intent.resolveActivity(packageManager) != null) {
+            getImage.launch(intent)
+        } else {
+            Toast.makeText(this, "No gallery app found", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Handle selected image result
+    private val getImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+            imageUri = result.data!!.data!!
+            imageViewFish.setImageURI(imageUri)
+        } else {
+            Toast.makeText(this, "Image selection failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Upload image to Firebase Storage
+    private fun uploadImageToFirebase(uri: Uri, onSuccess: (String) -> Unit) {
+        val uniqueID = UUID.randomUUID().toString()
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: "anonymous"
+        val imageRef = storageReference.child("images/$userId/$uniqueID.jpg")
+
+        imageRef.putFile(uri)
+            .addOnSuccessListener {
+                imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                    onSuccess(downloadUri.toString())
                 }
             }
+            .addOnFailureListener {
+                Toast.makeText(this, "Image upload failed", Toast.LENGTH_SHORT).show()
+            }
+    }
+}
+
 
 // This code contains a fish logging activity, which handlex user input, for fish logging entries saving to Firebase.
 // The following code was taken from Android
