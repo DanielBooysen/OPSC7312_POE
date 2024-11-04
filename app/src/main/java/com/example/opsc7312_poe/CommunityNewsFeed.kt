@@ -107,8 +107,6 @@ class CommunityNewsFeed : AppCompatActivity() {
                                     .addOnFailureListener { exception ->
                                         Log.e(ContentValues.TAG, "Error loading user data: ${exception.message}")
                                     }
-                            }else{
-                                Log.d(ContentValues.TAG, "userId empty")
                             }
                         }
                     } else {
