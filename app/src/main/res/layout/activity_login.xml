@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login via Fingerprint"
-        android:textColor="#0000FF"
+        android:textColor="@android:color/white"
         android:layout_gravity="center"
         android:paddingTop="8dp"
         android:clickable="true"
@@ -62,6 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SIGN IN"
+        android:backgroundTint="@android:color/holo_orange_light"
         android:paddingTop="16dp" />
 
 
@@ -79,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Don't have an account? SIGN UP"
-        android:textColor="#0000FF"
+        android:textColor="@android:color/white"
         android:layout_gravity="center"
         android:paddingTop="16dp"
         android:clickable="true"

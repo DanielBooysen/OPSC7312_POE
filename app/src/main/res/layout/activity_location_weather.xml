@@ -20,7 +20,9 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:paddingBottom="16dp"
-            android:textColor="@android:color/black"/>
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_orange_light"/>
 
         <!-- This is the layout where weather data will be appended -->
         <LinearLayout

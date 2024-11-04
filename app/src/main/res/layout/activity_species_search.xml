@@ -11,8 +11,8 @@
         android:id="@+id/speciesSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
-        android:background="@android:color/white"/>
+        android:spinnerMode="dropdown"/>
+        <!-- android:background="@android:color/white"-->
 
     <Button
         android:id="@+id/searchButton"
@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:text="Search"
         android:layout_gravity="center_horizontal"
+        android:backgroundTint="@android:color/holo_orange_light"
         android:layout_marginTop="16dp"/>
 
     <TextView
@@ -29,6 +30,6 @@
         android:layout_marginTop="16dp"
         android:text="Results will appear here"
         android:textSize="16sp"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/white"/>
 
 </LinearLayout>
