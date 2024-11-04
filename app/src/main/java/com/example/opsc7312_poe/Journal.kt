@@ -1,6 +1,9 @@
 package com.example.opsc7312_poe
 
 import android.content.ContentValues.TAG
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -48,20 +51,78 @@ fetchFishEntries()
 
         }
 
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
+
     private fun fetchFishEntries() {
-        // Get the current user's ID
+        // Check for network connectivity
+        if (isNetworkAvailable(this)) {
+            // Fetch data from Firebase Firestore
+            fetchFromFirestore()
+        } else {
+            // Fetch data from SQLite if offline
+            fetchFromLocalDatabase()
+        }
+    }
+
+    private fun fetchFromLocalDatabase() {
+        val dbHelper = DatabaseHelper(this)
+        val db = dbHelper.readableDatabase
+        val userId = auth.currentUser?.uid // Get the current user's ID
+        if (userId == null) {
+            Log.e(TAG, "User not authenticated")
+            Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Query SQLite database, filtering by userId
+        val cursor = db.query(
+            "FishEntries",
+            arrayOf("fishSpecies", "length", "weight", "baitUsed", "timeOfDay", "time", "weather", "location"),
+            "userId = ?", // Filter by userId
+            arrayOf(userId),
+            null, null, null
+        )
+
+        val fishEntriesList = mutableListOf<FishEntry>()
+        while (cursor.moveToNext()) {
+            val fishEntry = FishEntry(
+                species = cursor.getString(cursor.getColumnIndexOrThrow("fishSpecies")),
+                length = cursor.getString(cursor.getColumnIndexOrThrow("length")),
+                weight = cursor.getString(cursor.getColumnIndexOrThrow("weight")),
+                baitUsed = cursor.getString(cursor.getColumnIndexOrThrow("baitUsed")),
+                timeOfDay = cursor.getString(cursor.getColumnIndexOrThrow("timeOfDay")),
+                time = cursor.getString(cursor.getColumnIndexOrThrow("time")),
+                weather = cursor.getString(cursor.getColumnIndexOrThrow("weather")),
+                location = cursor.getString(cursor.getColumnIndexOrThrow("location"))
+            )
+            fishEntriesList.add(fishEntry)
+        }
+        cursor.close()
+
+        if (fishEntriesList.isNotEmpty()) {
+            adapter.setFishEntries(fishEntriesList)
+            Log.d(TAG, "Fish entries loaded from local database")
+        } else {
+            Log.d(TAG, "No fish entries found in the local database")
+            Toast.makeText(this, "No offline fish logs found", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    private fun fetchFromFirestore() {
         val userId = auth.currentUser?.uid
-        // Check if the user is authenticated
         if (userId != null) {
-            // Log the query attempt for debugging
             Log.d(TAG, "Fetching fish entries for user: $userId")
-            // Query Firestore for fish entries with the matching userId
             firestore.collection("fishEntries")
-                .whereEqualTo("userId", userId)  // Only fetch entries where userId matches the current user
+                .whereEqualTo("userId", userId)
                 .get()
                 .addOnSuccessListener { querySnapshot ->
                     if (!querySnapshot.isEmpty) {
-                        // Map each document to a FishEntry object
                         val fishEntriesList = querySnapshot.documents.map { document ->
                             val log = document.data ?: emptyMap<String, Any>()
                             FishEntry(
@@ -75,30 +136,22 @@ fetchFishEntries()
                                 location = log["location"] as? String ?: ""
                             )
                         }.toMutableList()
-                        // Update the adapter with the fetched entries
                         adapter.setFishEntries(fishEntriesList)
                         Log.d(TAG, "Fish entries loaded successfully")
                     } else {
-                        // No entries found for the user
                         Log.d(TAG, "No fish entries found for this user")
                         Toast.makeText(this, "No fish logs found", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .addOnFailureListener { exception ->
-                    // Log and notify the user if there's an error
                     Log.e(TAG, "Error loading fish entries: ${exception.message}")
                     Toast.makeText(this, "Error loading logs: ${exception.message}", Toast.LENGTH_SHORT).show()
                 }
         } else {
-            // User is not authenticated
             Log.e(TAG, "User not authenticated")
             Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-
-
 }
 // This code has a On create which initializes Firebase, which at the end fetches the users logged data from Firestore
 // The following code was taken from Stack Overflow

@@ -86,10 +86,29 @@ class FishLogging : AppCompatActivity() {
                     "userId" to user.uid // Associate the entry with the user
                 )
 
-                // Save the entry to Firestore
+                // Save the entry to Firestore and local database
                 firestore.collection("fishEntries")
                     .add(fishEntry)
                     .addOnSuccessListener {
+                        val dbHelper = DatabaseHelper(this)
+                        val success = dbHelper.insertFishEntry(
+                            userId = user.uid,
+                            fishSpecies = spinnerFishSpecies.selectedItem.toString(),
+                            length = inputLength.text.toString(),
+                            weight = inputWeight.text.toString(),
+                            baitUsed = inputBaitUsed.text.toString(),
+                            timeOfDay = spinnerTimeOfDay.selectedItem.toString(),
+                            time = inputTime.text.toString(),
+                            weather = spinnerWeather.selectedItem.toString(),
+                            location = spinnerLocation.selectedItem.toString()
+                        )
+
+                        if (success) {
+                            Toast.makeText(this, "Entry saved offline", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "Failed to save entry", Toast.LENGTH_SHORT).show()
+                        }
+
                         Toast.makeText(this, "Log added, Check Journal", Toast.LENGTH_SHORT).show()
                         finish() // Close the activity or clear fields if needed
                     }
